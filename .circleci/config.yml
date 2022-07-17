@@ -1,0 +1,19 @@
+
+
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1.2
+
+workflows:
+  build_and_push_image:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
+          aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
+          dockerfile: Dockerfile
+          path: .
+          region: us-east-1
+          registry-id: AWS_ECR_REGISTRY_ID
+          repo: tatooine
+          tag: "$CIRCLE_SHA1"
